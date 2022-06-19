@@ -1,0 +1,49 @@
+using System;
+
+namespace PaperPlease
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string amnestyCrime = "Антиправительственное";
+            Criminal ivanov = new Criminal("Иванов Иван Иванович", "Антиправительственное");
+            Criminal valeriev = new Criminal("Валерьев Валерий Влерьевич", "Антиправительственное");
+            Criminal zelemhanov = new Criminal("Зелемханов Зелемхан Зелемханович", "Измена");
+            Criminal kirillov = new Criminal("Кириллов Кирилл Кириллович", "Антиправительственное");
+            Criminal antonov = new Criminal("Антонов Антон Антонович", "Антиправительственное");
+            Criminal alexandrov = new Criminal("Александров Александр Александрович", "Дезертир");
+            Criminal negodyaev = new Criminal("Негодяев Негодяй Негодяевич", "Измена");
+            List<Criminal> criminals = new List<Criminal>() { ivanov, valeriev, zelemhanov, kirillov, antonov, alexandrov, negodyaev};
+            ShowAllCriminals(criminals);
+            Console.WriteLine("\nПрошла амнистия\n");
+            criminals = criminals.Where(criminal => criminal.Crime != amnestyCrime).ToList();
+            ShowAllCriminals(criminals);
+
+            void ShowAllCriminals(List<Criminal> criminals)
+            {
+                foreach (var criminal in criminals)
+                {
+                    Console.WriteLine(criminal.FullName);
+                }
+            }
+        }
+    }
+
+    class Criminal
+    {
+        public string FullName { get; private set; }
+        public string Crime { get; private set; }
+
+        public Criminal(string fullName, string crime)
+        {
+            FullName = fullName;
+            Crime = crime;
+        }
+    }
+}
+
+/*В нашей великой стране Арстоцка произошла амнистия!
+Всех людей, заключенных за преступление "Антиправительственное", следует исключить из списка заключенных.
+Есть список заключенных, каждый заключенный состоит из полей: ФИО, преступление.
+Вывести список до амнистии и после.*/
