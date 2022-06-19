@@ -1,0 +1,66 @@
+using System;
+
+namespace FirstOfLinq
+{
+    internal class Programm
+    {
+        static void Main(string[] args)
+        {
+            int height, weight;
+            string nationality;
+            Criminal murderer = new Criminal("Иванов Саша Иванович", true, 180, 80, "Эльф");
+            Criminal thief = new Criminal("Смирнов Николай Иванович", true, 200, 100, "Чех");
+            Criminal burglar = new Criminal("Американцев Армянин Японцев", false, 175, 40, "Чех");
+            Criminal conman = new Criminal("Демонов Валерий Геннадьевич", true, 150, 60, "Фин");
+            Criminal bloger = new Criminal("Негодяев Абудрозик Иванович", false, 175, 40, "Чех");
+            List<Criminal> archive = new List<Criminal>() { murderer, thief, burglar, conman, bloger };
+            Console.WriteLine("Рост:");
+            while(int.TryParse(Console.ReadLine(), out height) == false)
+            {
+                Console.WriteLine("Ошибка ввода");
+            }
+            Console.WriteLine("Вес:");
+            while (int.TryParse(Console.ReadLine(), out weight) == false)
+            {
+                Console.WriteLine("Ошибка ввода");
+            }
+            Console.WriteLine("Национальность:");
+            nationality = Console.ReadLine();
+
+            var detectiveSearch = archive.Where(criminal => criminal.Height == height
+                                                         && criminal.Weight == weight
+                                                         && criminal.Nationality == nationality
+                                                         && criminal.IsArested == false);
+
+            foreach (var criminal in detectiveSearch)
+            {
+                Console.WriteLine(criminal.FullName);
+            }
+        }
+    }
+
+    class Criminal
+    {
+        public string FullName { get; private set; }
+        public bool IsArested { get; private set; }
+        public int Height { get; private set; }
+        public int Weight { get; private set; }
+        public string Nationality { get; private set; }
+
+        public Criminal(string fullName, bool isArested, int height, int weight, string nationality)
+        {
+            FullName = fullName;
+            IsArested = isArested;
+            Height = height;
+            Weight = weight;
+            Nationality = nationality;
+        }
+    }
+}
+/*У нас есть список всех преступников.
+В преступнике есть поля: ФИО, заключен ли он под стражу, рост, вес, национальность.
+Вашей программой будут пользоваться детективы.
+У детектива запрашиваются данные (рост, вес, национальность),
+и детективу выводятся все преступники, которые подходят под эти параметры,
+но уже заключенные под стражу выводиться не должны.
+*/
