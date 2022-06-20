@@ -1,0 +1,51 @@
+using System;
+
+namespace PlayersList
+{
+    internal class Programm
+    {
+        static void Main()
+        {
+            Player ivanov = new Player("Иванов Иван Иванович", 50, 1);
+            Player valeriev = new Player("Валерьев Валерий Влерьевич", 40, 2);
+            Player zelemhanov = new Player("Зелемханов Зелемхан Зелемханович", 40, 3);
+            Player kirillov = new Player("Кириллов Кирилл Кириллович", 30, 5);
+            Player antonov = new Player("Антонов Антон Антонович", 40, 4);
+            Player alexandrov = new Player("Александров Александр Александрович", 50, 7);
+            Player negodyaev = new Player("Алексеев Алексей Алексеевич", 50, 78);
+            Player pavlov = new Player("Павлов Павел Павлович", 40, 9);
+            Player stanislavov = new Player("Станиславов Станислав Станиславович", 30, 14);
+            Player danilov = new Player("Данилов Даниил Данилович", 40, 54);
+            List<Player> players = new List<Player>() { ivanov, valeriev, zelemhanov, kirillov, antonov, alexandrov, negodyaev, pavlov, stanislavov, danilov };
+
+            Console.WriteLine("Топ 3 по уровню:");
+            var selectedPlayers = players.OrderByDescending(player => player.Level).Take(3);
+
+            foreach (Player player in selectedPlayers)
+            {
+                    Console.WriteLine(player.FullName + " " + player.Level);
+            }
+            Console.WriteLine("\n Топ 3 по силе");
+            selectedPlayers = players.OrderByDescending(player => player.Strength).Take(3);
+
+            foreach (Player player in selectedPlayers)
+            {
+                    Console.WriteLine(player.FullName + " " + player.Strength);
+            }
+        }
+    }
+
+    class Player
+    {
+        public string FullName { get; private set; }
+        public int Level { get; private set; }
+        public int Strength { get; private set; }
+
+        public Player(string fullName, int age, int diagnosis)
+        {
+            FullName = fullName;
+            Level = age;
+            Strength = diagnosis;
+        }
+    }
+}
