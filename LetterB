@@ -1,0 +1,35 @@
+using System;
+
+namespace PlayersList
+{
+    internal class Programm
+    {
+        static void Main()
+        {
+            Solder spiper = new Solder("Иван");
+            Solder genner = new Solder("Балера");
+            Solder granadeThrower = new Solder("Зелемхан");
+            Solder signalman = new Solder("Кирилл");
+            Solder commander = new Solder("Балександр");
+            List<Solder> firstSoldersList = new List<Solder>() { spiper, genner, granadeThrower, signalman, commander };
+            List<Solder> secondSoldersList = new List<Solder>() { spiper, genner, granadeThrower, signalman, commander };
+            var selectedSoldersWithLetterB = firstSoldersList.Where(solder => solder.Name[0] == 'Б').ToList();
+            secondSoldersList.AddRange(selectedSoldersWithLetterB);
+
+            foreach (var solder in secondSoldersList)
+            {
+                Console.WriteLine(solder.Name);
+            }
+        }
+    }
+
+    class Solder
+    {
+        public string Name { get; private set; }
+
+        public Solder(string name)
+        {
+            Name = name;
+        }
+    }
+}
