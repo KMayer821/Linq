@@ -19,18 +19,18 @@ namespace PlayersList
             List<Player> players = new List<Player>() { ivanov, valeriev, zelemhanov, kirillov, antonov, alexandrov, negodyaev, pavlov, stanislavov, danilov };
 
             Console.WriteLine("Топ 3 по уровню:");
-            var selectedPlayers = players.OrderByDescending(player => player.Level).Take(3);
+            var selectedPlayers = players.OrderByDescending(player => player.Level).Take(3).ToList();
+            ShowSelectedPlayers(selectedPlayers);
+            Console.WriteLine("\nТоп 3 по силе");
+            selectedPlayers = players.OrderByDescending(player => player.Strength).Take(3).ToList();
+            ShowSelectedPlayers(selectedPlayers);
 
-            foreach (Player player in selectedPlayers)
+            void ShowSelectedPlayers(List<Player> players)
             {
-                    Console.WriteLine(player.FullName + " " + player.Level);
-            }
-            Console.WriteLine("\n Топ 3 по силе");
-            selectedPlayers = players.OrderByDescending(player => player.Strength).Take(3);
-
-            foreach (Player player in selectedPlayers)
-            {
-                    Console.WriteLine(player.FullName + " " + player.Strength);
+                foreach (Player player in selectedPlayers)
+                {
+                    Console.WriteLine(player.FullName);
+                }
             }
         }
     }
