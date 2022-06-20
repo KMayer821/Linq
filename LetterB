@@ -11,11 +11,12 @@ namespace PlayersList
             Solder granadeThrower = new Solder("Зелемхан");
             Solder signalman = new Solder("Кирилл");
             Solder commander = new Solder("Балександр");
-            List<Solder> firstSoldersList = new List<Solder>() { spiper, genner, granadeThrower, signalman, commander };
-            List<Solder> secondSoldersList = new List<Solder>() { spiper, genner, granadeThrower, signalman, commander };
-            var selectedSoldersWithLetterB = firstSoldersList.Where(solder => solder.Name[0] == 'Б').ToList();
-            secondSoldersList.AddRange(selectedSoldersWithLetterB);
-
+            List<Solder> firstSoldersList = new List<Solder>() { spiper, genner, granadeThrower };
+            List<Solder> secondSoldersList = new List<Solder>() { signalman, commander };
+            var soldersNameBeginB = firstSoldersList.Where(solder => solder.Name[0] == 'Б').ToList();
+            secondSoldersList = secondSoldersList.Union(soldersNameBeginB).ToList();
+            firstSoldersList = firstSoldersList.Where(solder => solder.Name[0] != 'Б').ToList();
+            
             foreach (var solder in secondSoldersList)
             {
                 Console.WriteLine(solder.Name);
