@@ -1,0 +1,42 @@
+using System;
+
+namespace PlayersList
+{
+    internal class Programm
+    {
+        static void Main()
+        {
+            Stew ivanovskaya = new Stew("Ивановская", 2000, 10);
+            Stew valerievskaya = new Stew("Валерьевская", 2001, 25);
+            Stew zelemhanovskaya = new Stew("Зелемхановская", 2002, 30);
+            Stew kirillovskaya = new Stew("Кирилловская", 2003, 15);
+            List<Stew> typesOfStew = new List<Stew>() { ivanovskaya, valerievskaya, zelemhanovskaya, kirillovskaya };
+            int currentYear = 2022;
+
+            var selectedStew = typesOfStew.Where(stew => currentYear - stew.YearOfProduction < stew.ExpirationDate).ToList();
+            ShowDelayStew(selectedStew);
+
+            void ShowDelayStew(List<Stew> selectedStew)
+            {
+                foreach (Stew player in selectedStew)
+                {
+                    Console.WriteLine(player.Name);
+                }
+            }
+        }
+    }
+
+    class Stew
+    {
+        public string Name { get; private set; }
+        public int YearOfProduction { get; private set; }
+        public int ExpirationDate { get; private set; }
+
+        public Stew(string name, int yearOfProduction, int expirationDate)
+        {
+            Name = name;
+            YearOfProduction = yearOfProduction;
+            ExpirationDate = expirationDate;
+        }
+    }
+}
